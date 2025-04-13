@@ -1,6 +1,5 @@
-// server.test.js
 const request = require('supertest');
-const app = require('./server'); // import your Express app
+const app = require('./server');
 
 describe('API endpoint tests', () => {
   it('GET /api/hello should return Hello, world!', async () => {
