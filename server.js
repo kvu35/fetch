@@ -55,11 +55,15 @@ function computePoints(receipt) {
 }
 
 app.post('/receipts/process', (req, res) => {
-  const id = gen.generateId(counter++);
-  const points = computePoints(JSON.parse(req.body))
+  try {
+    const id = gen.generateId(counter++);
+    const points = computePoints(JSON.parse(req.body))
 
-  db.store(id, {"originalReceipt": JSON.parse(body), "points": points})
-  res.status(200).json({ "id": id });
+    db.store(id, {"originalReceipt": JSON.parse(body), "points": points})
+    res.status(200).json({ "id": id });     
+  } catch(error) {
+    res.status(400)
+  }
 });
 
 app.get('/receipts/:id/points', (req, res) => {
